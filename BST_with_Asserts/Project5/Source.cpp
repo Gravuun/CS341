@@ -6,29 +6,43 @@ using namespace std;
 int main() {
 	
 	vector<int> testVector;
+	BST* tree = new BST();
 
+	assert(tree->isEmpty());
 
 	for (int i = 0; i < 15; i++) {
-		testVector.push_back(rand() % 10000);
+		int insertion = rand() % 100;
+		testVector.push_back(insertion);
+		tree->insertNode(insertion);
 	}
+
+	assert(!tree->isEmpty());
 
 	BST* test = new BST(testVector);
 
-	cout << test->isEmpty() << endl;
+	assert(!test->isEmpty());
 
 	test->insertNode(1);
-	test->insertNode(2500);
-	test->insertNode(5000);
-	test->insertNode(7500);
-	test->insertNode(9999);
+	test->insertNode(25);
+	test->insertNode(50);
+	test->insertNode(75);
+	test->insertNode(99);
+
+	assert(test->contains(1) && test->contains(25) && test->contains(50) && test->contains(75) && test->contains(99));
+
+	assert(!(tree->equals(test)));
 
 	test->printTree();
 
 	test->deleteNode(1);
-	test->deleteNode(2500);
-	test->deleteNode(5000);
-	test->deleteNode(7500);
-	test->deleteNode(9999);
+	test->deleteNode(25);
+	test->deleteNode(50);
+	test->deleteNode(75);
+	test->deleteNode(99);
+
+	assert(!test->contains(1) && !test->contains(25) && !test->contains(50) && !test->contains(75) && !test->contains(99));
+
+	assert(tree->equals(test));
 
 	cout << endl << endl;
 

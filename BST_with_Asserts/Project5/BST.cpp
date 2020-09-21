@@ -1,14 +1,14 @@
 #include "BST.h"
 
-
-
 BST::BST()
 {
 	this->root = nullptr;
+	size = 0;
 }
 
 BST::BST(int value) {
 	root = new Node(value);
+	size = 1;
 }
 
 BST::BST(std::vector<int> values) {
@@ -20,6 +20,8 @@ BST::BST(std::vector<int> values) {
 	for (unsigned int i = 1; i < values.size(); i++) {
 		insertNode(root, values[i]);
 	}
+
+	size = values.size();
 }
 
 
@@ -40,7 +42,7 @@ void BST::cleanupTree(Node* target) {
 	delete target;
 }
 
-bool BST::isEmpty() {
+bool BST::isEmpty() const {
 	return (root == nullptr);
 }
 
@@ -49,18 +51,19 @@ void BST::insertNode(int value) {
 		root = new Node(value);
 	}
 
-	else {
-		insertNode(root, value);
-	}
-}
-
-void BST::insertNode(Node* target, int value) {
-	// This BST implementation does not allow duplicates
-	if (target->value == value) {
+	else if (contains(value)) {
+		// no duplicates in tree
 		return;
 	}
 
-	else if (target->value > value) {
+	else {
+		insertNode(root, value);
+	}
+	size++;
+}
+
+void BST::insertNode(Node* target, int value) {
+	if (target->value > value) {
 		if (target->left == nullptr) {
 			target->left = new Node(value);
 		}
@@ -90,10 +93,11 @@ void BST::deleteNode(int value) {
 
 	else {
 		deleteNode(root, value);
+		size--;
 	}
 }
 
-int BST::findMin(Node* target) {
+int BST::findMin(Node* target) const {
 	if (target->left != nullptr) {
 		return findMin(target->left);
 	}
@@ -155,7 +159,7 @@ Node* BST::deleteNode(Node* target, int value) {
 	return target;
 }
 
-bool BST::contains(int value) {
+bool BST::contains(int value) const {
 	if (isEmpty()) {
 		return false;
 	}
@@ -164,7 +168,7 @@ bool BST::contains(int value) {
 	return contains(root, value);
 }
 
-bool BST::contains(Node* target, int value) {
+bool BST::contains(Node* target, int value) const {
 	if (target->value == value) {
 		return true;
 	}
@@ -180,7 +184,7 @@ bool BST::contains(Node* target, int value) {
 }
 
 // BFS to print tree
-void BST::printTree(Node* target) {
+void BST::printTree(Node* target) const {
 	if (target->left != nullptr) {
 		printTree(target->left);
 	}
@@ -190,7 +194,7 @@ void BST::printTree(Node* target) {
 	}
 }
 
-void BST::printTree() {
+void BST::printTree() const {
 	if (isEmpty()) {
 		std::cout << "This tree is empty!";
 		return;
@@ -199,4 +203,38 @@ void BST::printTree() {
 		printTree(root);
 		std::cout << std::endl;
 	}
+}
+
+bool BST::equals(BST* rhs) const {
+
+	if (size != rhs->size) {
+		return false;
+	}
+
+	std::unordered_set<int> contents;
+
+	catalog(root, contents);
+
+	for (auto itr = contents.begin(); itr != contents.end(); itr++) {
+		if (!rhs->contains(*itr)) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+void BST::catalog(Node* target, std::unordered_set<int>& contents) const {
+	if (target->left != nullptr) {
+		catalog(target->left, contents);
+	}
+	assert(contents.find(target->value) == contents.cend());
+	contents.insert(target->value);
+	if (target->right != nullptr) {
+		catalog(target->right, contents);
+	}
+}
+
+int BST::get_size() const {
+	return size;
 }
