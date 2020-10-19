@@ -1,0 +1,3 @@
+Lines of Code read:	221
+Keywords Found:	111
+Time Elapsed:	30 milliseconds
