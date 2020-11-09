@@ -1,4 +1,5 @@
 # CS341
+
 Projects for Univeristy of Redlands course CS341
 
 Homework 3: SalesList project - Window application that allows you to add items to your purchase list and calculates the total cost.
@@ -10,3 +11,5 @@ Homework 5: Real Number Mean and Standard Deviation Calculator - Reads in Real N
 Homework 7: Keyword Counter - Using a text file storing Java keywords, parses code file and counts lines of code and number of keywords.
 
 Homework 8: Inventory Manager - Takes in SKU, title, price, and quantity of textbooks, allows for removal and display of textbooks. Stores inventory in a serialized manner.
+
+Homework 10: Adapter Design patterns.
