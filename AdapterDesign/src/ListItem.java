@@ -51,18 +51,21 @@ public class ListItem implements Comparable<ListItem> {
 		private int borderSize = DEFAULT_THICKNESS;
 
 		private int valA;
+		private int valB;
 
-		public ItemIcon(int valA) {
+		public ItemIcon(int valA, int valB) {
 			this.valA = valA;
+			this.valB = valB;
 		}
 
-		public ItemIcon(int valA, int diameter) {
-			this(valA);
+		public ItemIcon(int valA, int valB, int diameter) {
+			this(valA, valB);
 			setDiameter(diameter);
 		}
 
 		public ItemIcon(ListItem item) {
 			this.valA = item.getValA();
+			this.valB = item.getValB();
 		}
 
 		public ItemIcon(ListItem item, int diameter) {
