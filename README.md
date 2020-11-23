@@ -13,3 +13,7 @@ Homework 7: Keyword Counter - Using a text file storing Java keywords, parses co
 Homework 8: Inventory Manager - Takes in SKU, title, price, and quantity of textbooks, allows for removal and display of textbooks. Stores inventory in a serialized manner.
 
 Homework 10: Adapter Design patterns.
+
+Homework 11: OrchestraObserverPattern - Observer Pattern example
+
+Homework 12: CakeFactoryPattern - Factory Pattern example
